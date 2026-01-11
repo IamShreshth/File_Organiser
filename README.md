@@ -1,0 +1,10 @@
+# File Organizer
+
+## What this project does
+Automatically organizes files in a given folder based on file type.
+
+## How it works (logic)
+1. Takes a folder path as input
+2. Scans all files in the folder
+3. Identifies file type using file extension
+4. Moves files into categorized folders
