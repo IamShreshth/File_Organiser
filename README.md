@@ -8,3 +8,9 @@ Automatically organizes files in a given folder based on file type.
 2. Scans all files in the folder
 3. Identifies file type using file extension
 4. Moves files into categorized folders
+
+## File classification logic
+Files are categorized based on their extensions.
+Each extension is mapped to a folder name.
+If a file extension does not match any category,
+it is moved to the Others folder.
