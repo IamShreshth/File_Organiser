@@ -14,3 +14,7 @@ Files are categorized based on their extensions.
 Each extension is mapped to a folder name.
 If a file extension does not match any category,
 it is moved to the Others folder.
+
+## Configuration
+File type rules are stored separately in `config.py`
+to keep the logic modular and easy to extend.
