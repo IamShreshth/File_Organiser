@@ -1,8 +1,10 @@
 import os
 import shutil 
+import argparse
+
 from config import FILE_CATEGORIES
 
-def organize_folder(folder_path):
+def organise_folder(folder_path,dry_run=False):
     items = os.listdir(folder_path)
 
     for item in items:
@@ -29,11 +31,31 @@ def organize_folder(folder_path):
 
         # Move file
         new_path = os.path.join(destination_path, item)
-        shutil.move(item_path, new_path)
-
-        print(f"Moved {item} → {destination_folder}")
+        if dry_run:
+            print(f"[DRY RUN] {item} → {destination_folder}")
+        else:
+            shutil.move(item_path, new_path)
+            print(f"Moved {item} → {destination_folder}")
 
 if __name__ == "__main__":
-    target_folder = "../test_folder"
-    organize_folder(target_folder)
+    parser = argparse.ArgumentParser(
+        description="Automatically organise files in a folder"
+    )
+
+    parser.add_argument(
+        "path",
+        help="Path of the folder you want to organise"
+    )
+
+    parser.add_argument(
+    "--dry-run",
+    action="store_true",
+    help="Show what would happen without moving files"
+    )
+
+
+    args = parser.parse_args()
+    organise_folder(args.path, args.dry_run)
+
+
 

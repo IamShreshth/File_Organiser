@@ -1,7 +1,7 @@
-# File Organizer
+# File organiser
 
 ## What this project does
-Automatically organizes files in a given folder based on file type.
+Automatically organises files in a given folder based on file type.
 
 ## How it works (logic)
 1. Takes a folder path as input
