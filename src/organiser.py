@@ -31,11 +31,19 @@ def organise_folder(folder_path,dry_run=False):
 
         # Move file
         new_path = os.path.join(destination_path, item)
-        if dry_run:
-            print(f"[DRY RUN] {item} → {destination_folder}")
-        else:
-            shutil.move(item_path, new_path)
-            print(f"Moved {item} → {destination_folder}")
+        try:
+            if dry_run:
+                print(f"[DRY RUN] {item} → {destination_folder}")
+            else:
+                shutil.move(item_path, new_path)
+                print(f"Moved {item} → {destination_folder}")
+        except PermissionError:
+            print(f"[SKIPPED - PERMISSION] {item}")
+            continue
+        except OSError as e:
+            print(f"[SKIPPED - OS ERROR] {item}: {e}")
+            continue
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
