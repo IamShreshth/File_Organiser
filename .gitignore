@@ -8,4 +8,5 @@ __pycache__/
 # Test folder (local only)
 test_folder/
 
+# Logger stats Time And Date 
 logs/*.log
