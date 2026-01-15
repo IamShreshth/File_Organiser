@@ -1,6 +1,9 @@
 import os
 import shutil 
 import argparse
+import subprocess
+
+
 
 from config import FILE_CATEGORIES
 
@@ -13,6 +16,11 @@ def organise_folder(folder_path,dry_run=False):
         # Ignore folders
         if not os.path.isfile(item_path):
             continue
+        # Skip macOS quarantined files
+        if is_quarantined(item_path):
+            print(f"[QUARANTINED] {item} (skipped)")
+            continue
+
 
         name, extension = os.path.splitext(item)
         extension = extension.lower()
@@ -64,6 +72,24 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     organise_folder(args.path, args.dry_run)
+
+def is_quarantined(file_path):
+    """
+    Returns True if file has macOS quarantine attribute.
+    """
+    try:
+        result = subprocess.run(
+            ["xattr", file_path],
+            capture_output=True,
+            text=True
+        )
+        return "com.apple.quarantine" in result.stdout
+    except Exception:
+        return False
+    
+
+
+
 
 
 
